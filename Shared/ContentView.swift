@@ -40,6 +40,8 @@ struct ContentView: View {
             Text("The next estimate of π will throw "+String(Int(pow(10.0, user_data.exponent_number_of_throws)))+dart_or_darts() )
                 .font(.subheadline)
                 .padding(.bottom)
+            ProgressView(value: user_data.progress)
+            
         }
     }
 }
