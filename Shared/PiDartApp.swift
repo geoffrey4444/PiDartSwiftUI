@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct PiDartApp: App {
+    var user_data = UserData()
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        return WindowGroup {
+            ContentView().environmentObject(user_data)
+        }
+        .commands {
+            CommandMenu("Calculate") {
+                Button("Estimate Pi", action: {user_data.estimate_pi()})
+                    .keyboardShortcut(KeyEquivalent("e"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
+            }
         }
     }
 }
