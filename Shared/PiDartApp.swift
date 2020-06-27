@@ -18,6 +18,7 @@ struct PiDartApp: App {
             CommandMenu("Calculate") {
                 Button("Estimate Pi", action: {user_data.estimate_pi()})
                     .keyboardShortcut(KeyEquivalent("e"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
+                    .disabled(user_data.calculating)
             }
         }
     }

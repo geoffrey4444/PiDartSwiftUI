@@ -13,6 +13,7 @@ final class UserData: ObservableObject {
     @Published var pi_estimate : Double = 0.0
     @Published var pi_estimate_string : String = "0.0"
     @Published var progress : Double = 0.0
+    @Published var calculating : Bool = false
     
     func estimate_pi() {
         DispatchQueue.global(qos: .userInitiated).async {
@@ -22,6 +23,7 @@ final class UserData: ObservableObject {
             
             DispatchQueue.main.async {
                 self.progress = 0.0
+                self.calculating = true
             }
             
             while (darts_thrown < darts_to_throw) {
@@ -33,7 +35,7 @@ final class UserData: ObservableObject {
                 
                 if (100 * hits % darts_to_throw == 0) {
                     DispatchQueue.main.async {
-                        self.progress += 0.01
+                        self.progress = min(self.progress + 0.01, 1.0)
                     }
                 }
                 
@@ -43,6 +45,7 @@ final class UserData: ObservableObject {
             DispatchQueue.main.async {
                 self.pi_estimate = 4.0 * Double(hits) / Double(darts_thrown)
                 self.progress = 0.0
+                self.calculating = false
             }
         }
     }

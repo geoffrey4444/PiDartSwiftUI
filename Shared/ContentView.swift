@@ -22,7 +22,7 @@ struct ContentView: View {
             Text(String(user_data.pi_estimate)).padding(.all).frame(width: 400, height: 40.0)
             Button(action: {user_data.estimate_pi()}) {
                 Text("Estimate Pi")
-            }
+            }.disabled(user_data.calculating)
             .padding([.leading, .bottom, .trailing])
             HStack {
                 Text("Fewer darts (faster)")
@@ -41,6 +41,7 @@ struct ContentView: View {
                 .font(.subheadline)
                 .padding(.bottom)
             ProgressView(value: user_data.progress)
+                .padding([.leading, .bottom, .trailing])
             
         }
     }
