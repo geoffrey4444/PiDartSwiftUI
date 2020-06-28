@@ -15,15 +15,29 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("π Estimate")
-                .font(.headline)
-                .padding(.top)
-            Text(String(user_data.pi_estimate)).padding(.all).frame(width: 400, height: 40.0)
-            Button(action: {user_data.estimate_pi()}) {
-                Text("Estimate Pi")
-            }.disabled(user_data.calculating)
-            .padding([.leading, .bottom, .trailing])
+        VStack(alignment: .leading) {
+            HStack {
+                Text("π Estimate")
+                    .font(.headline)
+                    .padding([.all])
+                Text(String(user_data.pi_estimate)).padding(.all)
+                Button(action: {
+                    let pb = NSPasteboard.general
+                    pb.clearContents()
+                    pb.setString(String(user_data.pi_estimate), forType: NSPasteboard.PasteboardType.string)
+                }) {Image(systemName: "doc.on.clipboard")}
+                    .padding([.all])
+                    .buttonStyle(PlainButtonStyle())
+                
+                Spacer()
+                
+                Button(action: {user_data.estimate_pi()}) {
+                    Text("Estimate Pi")
+                }.disabled(user_data.calculating)
+                .padding([.all])
+            }
+            
+            
             HStack {
                 Text("Fewer darts (faster)")
                     .font(.subheadline)

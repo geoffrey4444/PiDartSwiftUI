@@ -11,7 +11,6 @@ import Combine
 final class UserData: ObservableObject {
     @Published var exponent_number_of_throws : Double = 4.0
     @Published var pi_estimate : Double = 0.0
-    @Published var pi_estimate_string : String = "0.0"
     @Published var progress : Double = 0.0
     @Published var calculating : Bool = false
     
